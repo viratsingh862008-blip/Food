@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -12,7 +12,7 @@ import {
   ShoppingBag,
   Star
 } from "lucide-react";
-import { business, businessImages, menuItems } from "./data";
+import { business, businessImages } from "./data";
 
 const gallery = businessImages;
 
