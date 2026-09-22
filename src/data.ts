@@ -15,6 +15,28 @@ export const menuCategories = [
 
 const swiggyFoodImage = "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/FOOD_CATALOG/IMAGES/CMS/2026/8/21/dc16365f-a84f-4948-a71e-f5f19c9958d9_b602813a-a55e-493b-b756-1365be8eea63.jpg";
 
+export const menuCategoryImages: Record<string, string> = {
+  Breakfast: "https://images.unsplash.com/photo-1588166524941-3bf61a9c41db?auto=format&fit=crop&w=1200&q=85",
+  Starters: swiggyFoodImage,
+  Rolls: "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=1200&q=85",
+  Burgers: "https://instamart-media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,h_960,w_960//InstamartAssets/Receipes/butter_chicken_burger.webp",
+  "Fried Rice": "https://instamart-media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,h_960,w_960//InstamartAssets/fried_rice.webp?updatedAt=1727156648584",
+  Chowmein: "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_240,h_240/FOOD_CATALOG/IMAGES/CMS/2026/4/14/9f54192b-3217-4391-97e7-6fd50036d675_b711ceb6-674e-4e98-9b36-69e16b9af4a9.png",
+  "Hot Dogs": "https://images.unsplash.com/photo-1612392062631-94dd858cba88?auto=format&fit=crop&w=1200&q=85",
+  Combos: "https://instamart-media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,h_960,w_960//InstamartAssets/2/chinese_egg_fried_rice.webp",
+  Chilli: swiggyFoodImage,
+  Pizza: "https://instamart-media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,h_960,w_960//InstamartAssets/Receipes/veg_cheese_pizza.webp",
+  Sandwich: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=1200&q=85",
+  "Snacks/Rolls": "https://instamart-media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,h_960,w_960//InstamartAssets/french_fries.webp?updatedAt=1727157086369",
+  "FP Veg": "https://instamart-media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,h_960,w_960//InstamartAssets/french_fries.webp?updatedAt=1727157086369",
+  Biryani: "https://instamart-media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,h_960,w_960//InstamartAssets/Receipes/shahi_chicken_biryani.webp",
+  Rice: "https://instamart-media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,h_960,w_960//InstamartAssets/fried_rice.webp?updatedAt=1727156648584",
+  Drinks: "https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=1200&q=85",
+  Desserts: "https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=1200&q=85",
+  Chinese: "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_240,h_240/FOOD_CATALOG/IMAGES/CMS/2026/4/14/9f54192b-3217-4391-97e7-6fd50036d675_b711ceb6-674e-4e98-9b36-69e16b9af4a9.png",
+  Other: swiggyFoodImage
+};
+
 export const menuItems: MenuItem[] = [
   {name:"Veg Manchurian (Pack of 2)",category:"Starters",price:190,source:"Swiggy",image:swiggyFoodImage},
   {name:"Veg Spring Roll",category:"Starters",price:63,source:"Swiggy",image:swiggyFoodImage},
