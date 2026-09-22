@@ -29,16 +29,20 @@ export function filterMenu(items: MenuItem[], category: typeof menuCategories[nu
 
 export const businessImages = [
   {
-    src: "https://images.openai.com/static-rsc-1/fy1Cp8YzdE_lYWG-rOYb5jgpHaDPkQ7_lo1P5Gc0d3XY3PXIysA2GeBPufwWkLAxOYr0dWoNHcQPM_WR-3oTBR-6lP3B9zOJ0xt7hY-ydaCPbj6N6VZZkuqFABg3-XZ6voVh-A6dKId4G5sngI2Qab1Rm--f-UTI0f2FjwG03Kk",
-    alt: "Food Plaza Bettiah business listing photo"
+    src: "https://content3.jdmagicbox.com/comp/bettiah/l4/9999p6254.6254.220812201639.l2l4/catalogue/-17366wy72r.jpg",
+    alt: "Food Plaza Bettiah storefront photo from the Supriya Cinema Road listing"
   },
   {
-    src: "https://images.openai.com/static-rsc-1/McvcoD7lrhrUQVw6YA1YBMJVvq5YPEf8OoUgG-PE_FZEAh0sIf2yGHX7yFTzSXVFVAfiy16VRk6bPSaAfeGM3-7J5p9ubpitcEWMpnt0-OkZwG8A5s7yrbD7DFg3mVkdItoyLxZBOIwEbaDj2CEuwqqMcQHaJ165tMBV1-adEuc",
-    alt: "Food Plaza Bettiah customer review photo"
+    src: "https://content.jdmagicbox.com/comp/bettiah/l4/9999p6254.6254.220812201639.l2l4/catalogue/-d5of0m5qti.jpg",
+    alt: "Food Plaza Bettiah local business photo from the Supriya Cinema Road listing"
   },
   {
-    src: "https://images.openai.com/static-rsc-1/a-8D3HOD_IiWfytJUQgqlQOLzeuaS3kgLk9GYFhxZ5zlRElG_Dyjf_k78FYo3nmxUF6NB5EjFeR4FPuu25fHYhbdCvBRZz5XX-QB8RMZGG9IXIV5bNUcY-fZTowl5G71ZNEyguodJADdxq3ApdYt7TP_iJ9LhSm3J7q5iUva-zQ",
-    alt: "Food Plaza Bettiah customer review photo"
+    src: "https://content3.jdmagicbox.com/comp/bettiah/l4/9999p6254.6254.220812201639.l2l4/catalogue/food-plaza-bettiah-bettiah-ho-bettiah-indian-restaurants-686g38pjkz.jpg",
+    alt: "Food Plaza Bettiah local business photo from the Supriya Cinema Road listing"
+  },
+  {
+    src: "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/FOOD_CATALOG/IMAGES/CMS/2026/8/21/dc16365f-a84f-4948-a71e-f5f19c9958d9_b602813a-a55e-493b-b756-1365be8eea63.jpg",
+    alt: "Food Plaza Bettiah food photo from its current Swiggy listing"
   }
 ] as const;
 
