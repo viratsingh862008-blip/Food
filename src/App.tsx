@@ -10,8 +10,7 @@ import {
   Navigation,
   Phone,
   ShoppingBag,
-  Star,
-  UtensilsCrossed
+  Star
 } from "lucide-react";
 import { business, businessImages, filterMenu, menuCategories, menuItems } from "./data";
 
