@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { filterMenu, menuCategories, menuItems } from "./data";
+import { business, filterMenu, menuCategories, menuItems, businessImages } from "./data";
 
 describe("Food Plaza menu", () => {
   it("contains the published menu categories", () => {
@@ -23,6 +23,12 @@ describe("Food Plaza menu", () => {
     expect(result.length).toBeGreaterThan(0);
     expect(result.every((item) => item.category === "Pizza")).toBe(true);
     expect(filterMenu(menuItems, "All")).toEqual(menuItems);
+  });
+
+  it("keeps multiple verified business-listing images available for the visual system", () => {
+    expect(businessImages.length).toBeGreaterThanOrEqual(3);
+    expect(businessImages.every((image) => image.src.startsWith("https://"))).toBe(true);
+    expect(businessImages.every((image) => image.alt.length > 0)).toBe(true);
   });
 
   it("uses a safe public contact state until the listing conflict is verified", () => {
