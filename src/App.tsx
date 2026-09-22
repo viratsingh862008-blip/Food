@@ -5,14 +5,13 @@ import {
   ChevronLeft,
   ChevronRight,
   Clock3,
-  Instagram,
   MapPin,
   Navigation,
   Phone,
   ShoppingBag,
   Star
 } from "lucide-react";
-import { business, businessImages, filterMenu, menuCategories, menuItems } from "./data";
+import { business, businessImages, filterMenu, menuCategories, menuCategoryImages, menuItems } from "./data";
 
 const gallery = businessImages;
 
@@ -21,7 +20,7 @@ const menuSlides = [
     name: "Pizza",
     role: "Tandoori Paneer Pizza",
     description: "Oven-baked comfort with tandoori paneer, mozzarella, onion, capsicum and paprika — a full-flavour pick when the table wants pizza.",
-    image: businessImages[3].src,
+    image: menuCategoryImages.Pizza,
     meta: "TANDOORI · MOZZARELLA · CAPSICUM",
     price: "₹200"
   },
@@ -29,7 +28,7 @@ const menuSlides = [
     name: "Burgers",
     role: "Grilled Tikki Burger",
     description: "A familiar street-food favourite with a grilled veg tikki, built for a quick bite between everything else on the menu.",
-    image: businessImages[1].src,
+    image: menuCategoryImages.Burgers,
     meta: "GRILLED · TIKKI · QUICK BITE",
     price: "₹75"
   },
@@ -37,7 +36,7 @@ const menuSlides = [
     name: "Chinese",
     role: "Veg Manchurian",
     description: "The Chinese side of Food Plaza brings bold, savoury flavours to the table — from manchurian to stir-fried favourites.",
-    image: businessImages[2].src,
+    image: menuCategoryImages.Chowmein,
     meta: "SAVOURY · SPICY · INDO-CHINESE",
     price: "₹190"
   },
@@ -45,7 +44,7 @@ const menuSlides = [
     name: "Rolls",
     role: "Chicken 2 Egg Roll With Mayo",
     description: "Chicken, egg and mayo wrapped into a proper handheld craving for when you want something fast, filling and messy in the best way.",
-    image: businessImages[3].src,
+    image: menuCategoryImages.Rolls,
     meta: "CHICKEN · EGG · MAYO",
     price: "₹88"
   },
@@ -53,7 +52,7 @@ const menuSlides = [
     name: "Rice & Biryani",
     role: "Veg Biryani",
     description: "Aromatic rice, vegetables and warming spices — the slower, fuller plate in a menu otherwise made for quick cravings.",
-    image: businessImages[2].src,
+    image: menuCategoryImages.Biryani,
     meta: "AROMATIC · SPICED · FULL PLATE",
     price: "₹155"
   },
@@ -61,23 +60,23 @@ const menuSlides = [
     name: "Snacks",
     role: "French Fries",
     description: "Golden, crisp and easy to share. The kind of side that disappears before anyone remembers who ordered it.",
-    image: businessImages[1].src,
+    image: menuCategoryImages["FP Veg"],
     meta: "CRISP · GOLDEN · SHAREABLE",
     price: "₹70"
   },
   {
-    name: "Pasta",
-    role: "Pasta",
-    description: "A comforting pasta option for the days when noodles, rice and rolls are not quite the answer.",
-    image: businessImages[3].src,
-    meta: "COMFORT · SAUCY · EASY",
-    price: "₹150"
+    name: "Fried Rice",
+    role: "Chicken Fried Rice",
+    description: "Wok-tossed rice with savoury seasoning — one of the core comfort-food choices on the Food Plaza menu.",
+    image: menuCategoryImages["Fried Rice"],
+    meta: "WOK-TOSSED · SAVOURY · FILLING",
+    price: "₹213"
   },
   {
     name: "Breakfast",
     role: "Chole Bhature",
     description: "Start the day with a proper North Indian favourite — hearty, familiar and made for a satisfying first plate.",
-    image: businessImages[0].src,
+    image: menuCategoryImages.Breakfast,
     meta: "BREAKFAST · HEARTY · LOCAL",
     price: "₹140"
   }
@@ -110,6 +109,9 @@ export default function App() {
   const [reviewIndex, setReviewIndex] = useState(0);
   const [sent, setSent] = useState(false);
   const [menuCategory, setMenuCategory] = useState<(typeof menuCategories)[number]>("All");
+
+  const getMenuImage = (category: string, fallback?: string) =>
+    menuCategoryImages[category] || fallback || businessImages[3].src;
 
   useEffect(() => {
     const sections = document.querySelectorAll(".reveal");
@@ -160,10 +162,8 @@ export default function App() {
           </div>
 
           <div className="hero-title" aria-label="Food Plaza">
-            <span className="hero-title-plaza-back">PLAZA</span>
-            <span className="hero-title-plaza-mid">PLAZA</span>
-            <span className="hero-title-food">FOOD</span>
-            <span className="hero-title-plaza-front">PLAZA</span>
+            <span className="hero-title-main">FOOD</span>
+            <span className="hero-title-sub">PLAZA</span>
           </div>
 
           <div className="hero-side hero-side-left" aria-hidden="true">
@@ -315,7 +315,15 @@ export default function App() {
           {filterMenu(menuItems, menuCategory).map((item, index) => (
             <article className="complete-menu-card" key={`${item.name}-${item.category}-${index}`}>
               <div className="complete-menu-image">
-                <img src={item.image || businessImages[3].src} alt={`${item.name} at Food Plaza Bettiah`} loading="lazy" />
+                <img
+                  src={getMenuImage(item.category, item.image)}
+                  alt={item.name + " menu item"}
+                  loading={index < 8 ? "eager" : "lazy"}
+                  onError={event => {
+                    event.currentTarget.onerror = null;
+                    event.currentTarget.src = businessImages[3].src;
+                  }}
+                />
                 <span>{item.source}</span>
               </div>
               <div className="complete-menu-info">
@@ -338,7 +346,7 @@ export default function App() {
       <section id="gallery" className="section gallery-section reveal">
         <div className="section-head compact">
           <div>
-            <span className="section-kicker">03 / THE PLAZA FILES</span>
+            <span className="section-kicker">04 / THE PLAZA FILES</span>
             <h2>Seen around<br /><em>Food Plaza.</em></h2>
           </div>
           <div className="gallery-controls">
@@ -372,7 +380,7 @@ export default function App() {
 
       <section id="location" className="section location-section reveal">
         <div className="location-copy">
-          <span className="section-kicker">04 / FIND US</span>
+          <span className="section-kicker">05 / FIND US</span>
           <h2>Right in the<br /><em>Bettiah</em> flow.</h2>
           <p>{business.address}</p>
           <div className="location-facts">
@@ -401,7 +409,7 @@ export default function App() {
 
       <section id="reviews" className="section reviews-section reveal">
         <div className="reviews-heading">
-          <span className="section-kicker">05 / LOCAL VOICES</span>
+          <span className="section-kicker">06 / LOCAL VOICES</span>
           <h2>What the<br /><em>city says.</em></h2>
           <p>Public listing data currently shows Food Plaza at 4.2 with 3.6K+ Swiggy ratings. Individual customer names and quotes below are intentionally marked as illustrative until verified testimonials are supplied.</p>
           <a href={business.orderUrl} target="_blank" rel="noreferrer">See the live listing <ArrowUpRight size={15} /></a>
@@ -441,7 +449,7 @@ export default function App() {
           <div className="about-number">06</div>
         </div>
         <div className="about-copy">
-          <span className="section-kicker">06 / ABOUT THE STOP</span>
+          <span className="section-kicker">07 / ABOUT THE STOP</span>
           <h2>Local address.<br /><em>Big appetite.</em></h2>
           <p>Food Plaza is a Supriya Road food stop in Bettiah with a broad fast-food and Indo-Chinese menu spanning rolls, fried rice, chowmein, burgers, pizza, snacks, drinks and more.</p>
           <p>The site is designed around the same energy as the place: bold layers, quick movement, food-first imagery and small interactive moments that keep the page feeling alive.</p>
@@ -455,7 +463,7 @@ export default function App() {
 
       <section id="contact" className="section contact-section reveal">
         <div className="contact-top">
-          <span className="section-kicker">07 / CONTACT</span>
+          <span className="section-kicker">08 / CONTACT</span>
           <h2>Come hungry.<br /><em>Leave happy.</em></h2>
         </div>
         <div className="contact-grid">
@@ -482,7 +490,7 @@ export default function App() {
       <footer className="site-footer">
         <span>FOOD PLAZA™ · BETTIAH</span>
         <span>SUPRIYA ROAD · BIHAR 845438</span>
-        <a href="https://www.instagram.com/" target="_blank" rel="noreferrer" aria-label="Instagram"><Instagram size={18} /></a>
+        <a href={business.orderUrl} target="_blank" rel="noreferrer" aria-label="Order online"><ShoppingBag size={18} /></a>
         <a href="#hero" className="back-top">BACK TO TOP ↑</a>
       </footer>
     </main>
