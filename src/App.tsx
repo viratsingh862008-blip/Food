@@ -12,6 +12,8 @@ import {
   Star
 } from "lucide-react";
 import { business, businessImages, filterMenu, menuCategories, menuCategoryImages, menuItems } from "./data";
+import AdminPanel from "./AdminPanel";
+import { useSiteConfig } from "./siteConfig";
 
 const gallery = businessImages;
 
@@ -104,6 +106,8 @@ const localFeedback = [
 ];
 
 export default function App() {
+  if (window.location.pathname === "/admin") return <AdminPanel />;
+  const site = useSiteConfig();
   const [activeMenu, setActiveMenu] = useState(0);
   const [galleryIndex, setGalleryIndex] = useState(0);
   const [reviewIndex, setReviewIndex] = useState(0);
@@ -131,13 +135,13 @@ export default function App() {
     return () => window.clearInterval(timer);
   }, []);
 
-  const nextGallery = () => setGalleryIndex(index => (index + 1) % gallery.length);
+  const nextGallery = () => setGalleryIndex(index => (index + 1) % site.gallery.length);
   const prevGallery = () => setGalleryIndex(index => (index - 1 + gallery.length) % gallery.length);
 
   return (
     <main className="food-page">
       <nav className="site-nav" aria-label="Primary navigation">
-        <a className="nav-brand" href="#hero">FOOD PLAZA<span>™</span></a>
+        <a className="nav-brand" href="#hero">{site.brand.name}<span>{site.brand.suffix}</span></a>
         <div className="nav-links">
           <a href="#menu">Menu</a>
           <a href="#gallery">Gallery</a>
@@ -145,8 +149,8 @@ export default function App() {
           <a href="#reviews">Reviews</a>
           <a href="#about">About</a>
         </div>
-        <a className="nav-order" href={business.orderUrl} target="_blank" rel="noreferrer">
-          Order <ShoppingBag size={15} />
+        <a className="nav-order" href={site.business.orderUrl} target="_blank" rel="noreferrer">
+          {site.nav.orderLabel} <ShoppingBag size={15} />
         </a>
       </nav>
 
@@ -198,18 +202,18 @@ export default function App() {
             <p>Big flavours, familiar favourites and a menu made for sharing around Bettiah.</p>
             <div className="hero-actions">
               <a className="button button-light" href={business.orderUrl} target="_blank" rel="noreferrer">
-                Order online <ShoppingBag size={16} />
+                {site.hero.primaryCta} <ShoppingBag size={16} />
               </a>
               <a className="button button-ghost" href="#menu">
-                Explore menu <ArrowRight size={16} />
+                {site.hero.secondaryCta} <ArrowRight size={16} />
               </a>
             </div>
           </div>
 
           <div className="hero-footer">
-            <span><Star size={12} fill="currentColor" /> 4.2 · 3.6K+ Swiggy ratings</span>
-            <span><Clock3 size={12} /> 10 AM — 10 PM</span>
-            <span><MapPin size={12} /> Old LIC Building · near V2 Mall</span>
+            <span><Star size={12} fill="currentColor" /> {site.business.rating}</span>
+            <span><Clock3 size={12} /> {site.business.hours}</span>
+            <span><MapPin size={12} /> {site.business.locationShort}</span>
           </div>
         </div>
       </section>
@@ -291,7 +295,7 @@ export default function App() {
             <h2>Every craving.<br /><em>One plaza.</em></h2>
           </div>
           <div className="full-menu-note">
-            <strong>{filterMenu(menuItems, menuCategory).length} items</strong>
+            <strong>{filterMenu(site.menuItems, menuCategory).length} items</strong>
             <span>Live listing data · Swiggy + Zomato</span>
           </div>
         </div>
@@ -357,14 +361,14 @@ export default function App() {
 
         <div className="gallery-stage">
           <div className="gallery-main">
-            <img src={gallery[galleryIndex].src} alt={gallery[galleryIndex].alt} />
+            <img src={site.gallery[galleryIndex].src} alt={gallery[galleryIndex].alt} />
             <div className="gallery-caption">
               <span>LIVE BUSINESS MEDIA</span>
               <strong>{String(galleryIndex + 1).padStart(2, "0")} / {String(gallery.length).padStart(2, "0")}</strong>
             </div>
           </div>
           <div className="gallery-stack">
-            {gallery.map((image, index) => (
+            {site.gallery.map((image, index) => (
               <button
                 key={image.src}
                 className={index === galleryIndex ? "thumb active" : "thumb"}
@@ -382,13 +386,13 @@ export default function App() {
         <div className="location-copy">
           <span className="section-kicker">05 / FIND US</span>
           <h2>Right in the<br /><em>Bettiah</em> flow.</h2>
-          <p>{business.address}</p>
+          <p>{site.business.address}</p>
           <div className="location-facts">
             <span><MapPin /> Supriya Cinema Road</span>
-            <span><Clock3 /> {business.hours}</span>
+            <span><Clock3 /> {site.business.hours}</span>
             <span><Navigation /> Near V2 Mall</span>
           </div>
-          <a className="button button-dark" href={business.mapsUrl} target="_blank" rel="noreferrer">
+          <a className="button button-dark" href={site.business.mapsUrl} target="_blank" rel="noreferrer">
             Open in Google Maps <ArrowUpRight size={16} />
           </a>
         </div>
@@ -396,7 +400,7 @@ export default function App() {
           <div className="map-pin"><MapPin size={18} /></div>
           <iframe
             title="Food Plaza location on Google Maps"
-            src={business.mapEmbedUrl}
+            src={site.business.mapEmbedUrl}
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
           />
@@ -451,8 +455,8 @@ export default function App() {
         <div className="about-copy">
           <span className="section-kicker">07 / ABOUT THE STOP</span>
           <h2>Local address.<br /><em>Big appetite.</em></h2>
-          <p>Food Plaza is a Supriya Road food stop in Bettiah with a broad fast-food and Indo-Chinese menu spanning rolls, fried rice, chowmein, burgers, pizza, snacks, drinks and more.</p>
-          <p>The site is designed around the same energy as the place: bold layers, quick movement, food-first imagery and small interactive moments that keep the page feeling alive.</p>
+          <p>{site.about.paragraph1}</p>
+          <p>{site.about.paragraph2}</p>
           <div className="about-strip">
             <span>BETTIAH</span>
             <span>EST. LOCAL FAVOURITE</span>
@@ -469,19 +473,19 @@ export default function App() {
         <div className="contact-grid">
           <div className="contact-card">
             <span>ORDER ONLINE</span>
-            <h3>Skip the wait.</h3>
-            <p>Use the current Swiggy listing for ordering and live delivery availability.</p>
+            <h3>{site.contact.orderTitle}</h3>
+            <p>{site.contact.orderDescription}</p>
             <a href={business.orderUrl} target="_blank" rel="noreferrer">Order on Swiggy <ShoppingBag size={17} /></a>
           </div>
           <div className="contact-card">
             <span>CALL / VISIT</span>
-            <h3>Talk to the plaza.</h3>
+            <h3>{site.contact.visitTitle}</h3>
             <p>{business.address}</p>
-            <a href={business.phoneUrl}>+91 87896 59093 <Phone size={17} /></a>
+            <a href={site.business.phoneUrl}>+91 87896 59093 <Phone size={17} /></a>
           </div>
           <form className="contact-form" onSubmit={event => { event.preventDefault(); setSent(true); }}>
             <label>Your name<input required placeholder="Your name" /></label>
-            <label>Your message<textarea required rows={3} placeholder="Booking, feedback or a question…" /></label>
+            <label>Your message<textarea required rows={3} placeholder="{site.contact.formPlaceholder}" /></label>
             <button type="submit">{sent ? "MESSAGE READY ✓" : "SEND MESSAGE"} <ArrowRight size={17} /></button>
           </form>
         </div>
