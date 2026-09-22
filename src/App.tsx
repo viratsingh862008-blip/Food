@@ -55,12 +55,12 @@ function PublicSite() {
         <div className="hero-topline"><span>{site.brand.name} {site.brand.suffix}</span><span>{site.business.address.split(",")[0]} · BETTIAH</span></div>
 
         <div className="title-stack" aria-label="Food Plaza">
-          <div className="hero-word hero-food-word">
+          <div className="hero-word hero-food-word" style={{transform:`translate(-50%, ${-progress * 22}px)`,opacity:0.96 + progress * 0.04}}>
             <span className="hero-word-shadow hero-food-blue">FOOD</span>
             <span className="hero-word-shadow hero-food-gold">FOOD</span>
             <span className="hero-word-front">FOOD</span>
           </div>
-          <div className="hero-word hero-plaza-word">
+          <div className="hero-word hero-plaza-word" style={{transform:`translate(-50%, ${progress * 46}px)`,opacity:0.96 + progress * 0.04}}>
             <span className="hero-word-shadow hero-plaza-blue">PLAZA</span>
             <span className="hero-word-shadow hero-plaza-gold">PLAZA</span>
             <span className="hero-word-front">PLAZA</span>
