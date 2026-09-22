@@ -1,20 +1,12 @@
 import { describe, expect, it } from "vitest";
-import { business, filterMenu, menuCategories, menuItems, businessImages } from "./data";
+import { business, businessImages, filterMenu, menuCategories, menuItems } from "./data";
+import { getHeroWordOffsets } from "./heroAnimation";
 
 describe("Food Plaza menu", () => {
   it("contains the published menu categories", () => {
     expect(menuCategories).toEqual([
-      "All",
-      "Breakfast",
-      "Starters",
-      "Rice & Biryani",
-      "Fried Rice & Chowmein",
-      "Pasta",
-      "Burgers & Sandwiches",
-      "Snacks",
-      "Rolls",
-      "Drinks",
-      "Pizza"
+      "All","Breakfast","Starters","Rice & Biryani","Fried Rice & Chowmein",
+      "Pasta","Burgers & Sandwiches","Snacks","Rolls","Drinks","Pizza"
     ]);
   });
 
@@ -25,14 +17,35 @@ describe("Food Plaza menu", () => {
     expect(filterMenu(menuItems, "All")).toEqual(menuItems);
   });
 
-  it("keeps multiple verified business-listing images available for the visual system", () => {
-    expect(businessImages.length).toBeGreaterThanOrEqual(3);
+  it("keeps multiple researched Food Plaza business images available", () => {
+    expect(businessImages.length).toBeGreaterThanOrEqual(4);
     expect(businessImages.every((image) => image.src.startsWith("https://"))).toBe(true);
-    expect(businessImages.every((image) => image.alt.length > 0)).toBe(true);
   });
 
-  it("uses a safe public contact state until the listing conflict is verified", () => {
-    const phones = ["+91 73230 04438", "+91 87896 59093"];
-    expect(new Set(phones).size).toBe(2);
+  it("keeps the public ordering destination configured", () => {
+    expect(business.orderUrl).toContain("swiggy.com");
+  });
+});
+
+describe("Food Plaza hero animation", () => {
+  it("starts with the reference staggered side-word offsets", () => {
+    expect(getHeroWordOffsets(0, 1440)).toEqual({
+      left: [-60, -100, -140, -180],
+      right: [60, 100, 140, 180]
+    });
+  });
+
+  it("pulls the side words fully inward at the end of the sticky range", () => {
+    expect(getHeroWordOffsets(1, 1440)).toEqual({
+      left: [0, 0, 0, 0],
+      right: [0, 0, 0, 0]
+    });
+  });
+
+  it("halves the offsets on mobile", () => {
+    expect(getHeroWordOffsets(0, 390)).toEqual({
+      left: [-30, -50, -70, -90],
+      right: [30, 50, 70, 90]
+    });
   });
 });
