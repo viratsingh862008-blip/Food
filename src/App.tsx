@@ -108,7 +108,8 @@ export default function App() {
   const [activeMenu, setActiveMenu] = useState(0);
   const [galleryIndex, setGalleryIndex] = useState(0);
   const [reviewIndex, setReviewIndex] = useState(0);
-  const [sent, setSent] = useState(false);\n  const [menuCategory, setMenuCategory] = useState<(typeof menuCategories)[number]>("All");
+  const [sent, setSent] = useState(false);
+  const [menuCategory, setMenuCategory] = useState<(typeof menuCategories)[number]>("All");
 
   useEffect(() => {
     const sections = document.querySelectorAll(".reveal");
