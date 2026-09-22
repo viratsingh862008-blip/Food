@@ -2,10 +2,11 @@ import { describe, expect, it } from "vitest";
 import { business, businessImages, filterMenu, menuCategories, menuItems } from "./data";
 
 describe("Food Plaza menu", () => {
-  it("contains the published menu categories", () => {
+  it("contains the expanded menu categories", () => {
     expect(menuCategories).toEqual([
-      "All","Breakfast","Starters","Rice & Biryani","Fried Rice & Chowmein",
-      "Pasta","Burgers & Sandwiches","Snacks","Rolls","Drinks","Pizza"
+      "All","Breakfast","Starters","Rolls","Burgers","Fried Rice","Chowmein","Hot Dogs",
+      "Combos","Chilli","Pizza","Sandwich","Snacks/Rolls","FP Veg","Biryani","Rice",
+      "Drinks","Desserts","Chinese","Other"
     ]);
   });
 
@@ -24,8 +25,10 @@ describe("Food Plaza menu", () => {
     expect(business.mapEmbedUrl).toContain("output=embed");
   });
 
-  it("contains enough menu content for the interactive filter", () => {
-    expect(menuItems.length).toBeGreaterThanOrEqual(10);
-    expect(new Set(menuItems.map(item => item.category)).size).toBeGreaterThanOrEqual(8);
+  it("contains the expanded menu dataset", () => {
+    expect(menuItems.length).toBeGreaterThanOrEqual(70);
+    expect(new Set(menuItems.map(item => item.category)).size).toBeGreaterThanOrEqual(12);
+    expect(menuItems.some(item => item.source === "Zomato")).toBe(true);
+    expect(menuItems.some(item => item.source === "Swiggy")).toBe(true);
   });
 });
