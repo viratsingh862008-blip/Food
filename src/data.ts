@@ -15,12 +15,18 @@ export const menuCategories = [
 ] as const;
 
 export const menuItems: MenuItem[] = [
-  { name:"Veg Manchurian", category:"Starters", description:"A popular vegetarian Indo-Chinese favourite.", price:190 },
+  { name:"Chole Bhature", category:"Breakfast", description:"A listed breakfast option at the Supriya Road outlet.", price:140 },
+  { name:"Veg Manchurian", category:"Starters", description:"Soft veg manchurian balls in a savoury gravy.", price:190 },
   { name:"Veg Spring Roll", category:"Starters", description:"Crispy vegetable spring rolls.", price:63 },
-  { name:"French Fries", category:"Snacks", description:"A listed customer favourite for a quick bite." },
-  { name:"Paneer Chowmein", category:"Fried Rice & Chowmein", description:"A listed customer favourite from the Supriya Road outlet." },
-  { name:"Chicken 2 Egg Roll With Mayo", category:"Rolls", description:"A listed customer favourite with a rich, filling roll." },
-  { name:"Grilled Tikki Burger", category:"Burgers & Sandwiches", description:"A listed customer favourite for a casual meal." }
+  { name:"Chicken Fried Rice", category:"Fried Rice & Chowmein", description:"A slightly spicy chicken fried rice listed on the live menu.", price:213 },
+  { name:"Paneer Chowmein", category:"Fried Rice & Chowmein", description:"Soft paneer with flavourful stir-fried noodles.", price:69 },
+  { name:"Chicken 2 Egg Roll With Mayo", category:"Rolls", description:"Chicken and egg in a laccha paratha with mayo.", price:88 },
+  { name:"Grilled Tikki Burger", category:"Burgers & Sandwiches", description:"Grilled veg tikka burger from the live menu.", price:75 },
+  { name:"French Fries", category:"Snacks", description:"Crispy golden fries for a quick bite.", price:70 },
+  { name:"Chocolate Shake", category:"Drinks", description:"A rich, creamy chocolate shake.", price:100 },
+  { name:"Tandoori Paneer Pizza", category:"Pizza", description:"Tandoori sauce, mozzarella, onion, capsicum and paprika.", price:200 },
+  { name:"Veg Biryani", category:"Rice & Biryani", description:"Aromatic rice layered with vegetables and spices.", price:155 },
+  { name:"Pasta", category:"Pasta", description:"A pasta option listed in the outlet's menu.", price:150 }
 ];
 
 export function filterMenu(items: MenuItem[], category: typeof menuCategories[number]) {
@@ -51,5 +57,8 @@ export const business = {
   address: "Supriya Road, Old LIC Building, near V2 Mall, Bettiah, Bihar 845438",
   hours: "10:00 AM – 10:00 PM",
   priceRange: "₹200–₹400",
-  orderUrl: "https://www.swiggy.com/city/bettiah/food-plaza-supriya-roa-supriya-road-rest345352"
+  orderUrl: "https://www.swiggy.com/city/bettiah/food-plaza-supriya-roa-supriya-road-rest345352",
+  mapsUrl: "https://www.google.com/maps/search/?api=1&query=Food%20Plaza%20Supriya%20Cinema%20Road%20Bettiah",
+  mapEmbedUrl: "https://www.google.com/maps?q=Food%20Plaza%20Supriya%20Cinema%20Road%20Bettiah&output=embed",
+  phoneUrl: "tel:+918789659093"
 };
