@@ -160,9 +160,10 @@ export default function App() {
           </div>
 
           <div className="hero-title" aria-label="Food Plaza">
-            <span className="hero-title-shadow">PLAZA</span>
-            <span className="hero-title-mid">PLAZA</span>
-            <span className="hero-title-main">FOOD</span>
+            <span className="hero-title-plaza-back">PLAZA</span>
+            <span className="hero-title-plaza-mid">PLAZA</span>
+            <span className="hero-title-food">FOOD</span>
+            <span className="hero-title-plaza-front">PLAZA</span>
           </div>
 
           <div className="hero-side hero-side-left" aria-hidden="true">
@@ -179,8 +180,11 @@ export default function App() {
           </div>
 
           <div className="hero-center">
-            <div className="hero-image">
+            <div className="hero-image hero-image-main">
               <img src={businessImages[3].src} alt="Food Plaza dish from the current Swiggy listing" />
+            </div>
+            <div className="hero-image hero-image-secondary" aria-hidden="true">
+              <img src={businessImages[1].src} alt="" />
             </div>
             <div className="hero-sticker">
               <small>GOOD FOOD</small>
@@ -217,7 +221,7 @@ export default function App() {
         </div>
       </div>
 
-      <section id="menu" className="menu-experience reveal">
+      <section id="menu" className="menu-experience">
         <div className="menu-backgrounds" aria-hidden="true">
           {menuSlides.map((slide, index) => (
             <div
@@ -280,7 +284,7 @@ export default function App() {
         </div>
       </section>
 
-      <section id="full-menu" className="section full-menu-section reveal">
+      <section id="full-menu" className="section full-menu-section">
         <div className="section-head compact">
           <div>
             <span className="section-kicker">03 / THE COMPLETE MENU</span>
