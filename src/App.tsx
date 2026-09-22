@@ -12,10 +12,76 @@ import {
   ShoppingBag,
   Star
 } from "lucide-react";
-import { business, businessImages, filterMenu, menuCategories, menuItems } from "./data";
+import { business, businessImages, menuItems } from "./data";
 
 const gallery = businessImages;
-const menuImageFor = (index: number) => gallery[index % gallery.length].src;
+
+const menuSlides = [
+  {
+    name: "Pizza",
+    role: "Tandoori Paneer Pizza",
+    description: "Oven-baked comfort with tandoori paneer, mozzarella, onion, capsicum and paprika — a full-flavour pick when the table wants pizza.",
+    image: businessImages[3].src,
+    meta: "TANDOORI · MOZZARELLA · CAPSICUM",
+    price: "₹200"
+  },
+  {
+    name: "Burgers",
+    role: "Grilled Tikki Burger",
+    description: "A familiar street-food favourite with a grilled veg tikki, built for a quick bite between everything else on the menu.",
+    image: businessImages[1].src,
+    meta: "GRILLED · TIKKI · QUICK BITE",
+    price: "₹75"
+  },
+  {
+    name: "Chinese",
+    role: "Veg Manchurian",
+    description: "The Chinese side of Food Plaza brings bold, savoury flavours to the table — from manchurian to stir-fried favourites.",
+    image: businessImages[2].src,
+    meta: "SAVOURY · SPICY · INDO-CHINESE",
+    price: "₹190"
+  },
+  {
+    name: "Rolls",
+    role: "Chicken 2 Egg Roll With Mayo",
+    description: "Chicken, egg and mayo wrapped into a proper handheld craving for when you want something fast, filling and messy in the best way.",
+    image: businessImages[3].src,
+    meta: "CHICKEN · EGG · MAYO",
+    price: "₹88"
+  },
+  {
+    name: "Rice & Biryani",
+    role: "Veg Biryani",
+    description: "Aromatic rice, vegetables and warming spices — the slower, fuller plate in a menu otherwise made for quick cravings.",
+    image: businessImages[2].src,
+    meta: "AROMATIC · SPICED · FULL PLATE",
+    price: "₹155"
+  },
+  {
+    name: "Snacks",
+    role: "French Fries",
+    description: "Golden, crisp and easy to share. The kind of side that disappears before anyone remembers who ordered it.",
+    image: businessImages[1].src,
+    meta: "CRISP · GOLDEN · SHAREABLE",
+    price: "₹70"
+  },
+  {
+    name: "Pasta",
+    role: "Pasta",
+    description: "A comforting pasta option for the days when noodles, rice and rolls are not quite the answer.",
+    image: businessImages[3].src,
+    meta: "COMFORT · SAUCY · EASY",
+    price: "₹150"
+  },
+  {
+    name: "Breakfast",
+    role: "Chole Bhature",
+    description: "Start the day with a proper North Indian favourite — hearty, familiar and made for a satisfying first plate.",
+    image: businessImages[0].src,
+    meta: "BREAKFAST · HEARTY · LOCAL",
+    price: "₹140"
+  }
+];
 
 const localFeedback = [
   {
@@ -39,15 +105,10 @@ const localFeedback = [
 ];
 
 export default function App() {
-  const [activeCategory, setActiveCategory] = useState<typeof menuCategories[number]>("All");
+  const [activeMenu, setActiveMenu] = useState(0);
   const [galleryIndex, setGalleryIndex] = useState(0);
   const [reviewIndex, setReviewIndex] = useState(0);
   const [sent, setSent] = useState(false);
-
-  const visibleMenu = useMemo(
-    () => filterMenu(menuItems, activeCategory).slice(0, 8),
-    [activeCategory]
-  );
 
   useEffect(() => {
     const sections = document.querySelectorAll(".reveal");
@@ -155,51 +216,66 @@ export default function App() {
         </div>
       </div>
 
-      <section id="menu" className="section menu-section reveal">
-        <div className="section-head">
-          <div>
-            <span className="section-kicker">02 / THE MENU</span>
-            <h2>Pick your<br /><em>craving.</em></h2>
+      <section id="menu" className="menu-experience reveal">
+        <div className="menu-backgrounds" aria-hidden="true">
+          {menuSlides.map((slide, index) => (
+            <div
+              key={slide.name}
+              className={index === activeMenu ? "menu-background is-active" : "menu-background"}
+              style={{ backgroundImage: `url(${slide.image})` }}
+            />
+          ))}
+        </div>
+        <div className="menu-overlay" aria-hidden="true" />
+
+        <div className="menu-content">
+          <div className="menu-top">
+            <div className="menu-headline">
+              <span className="menu-kicker">02 / THE MENU · FOOD PLAZA BETTIAH</span>
+              <h2>Food Plaza is the<br />craving you build<br /><em>your day around.</em></h2>
+            </div>
+
+            <div className="menu-description" key={menuSlides[activeMenu].name}>
+              <p>{menuSlides[activeMenu].description}</p>
+            </div>
           </div>
-          <p>Switch categories. Hover the cards. Tap into a menu built around the favourites already listed for the Supriya Road outlet.</p>
-        </div>
 
-        <div className="category-scroller" role="tablist" aria-label="Menu categories">
-          {menuCategories.map(category => (
-            <button
-              key={category}
-              className={activeCategory === category ? "category active" : "category"}
-              onClick={() => setActiveCategory(category)}
-              role="tab"
-              aria-selected={activeCategory === category}
-            >
-              {category}
-            </button>
-          ))}
-        </div>
+          <div className="menu-bottom">
+            <div className="menu-picker" role="tablist" aria-label="Food Plaza menu categories">
+              {menuSlides.map((slide, index) => (
+                <button
+                  key={slide.name}
+                  type="button"
+                  className="menu-picker-item"
+                  role="tab"
+                  aria-selected={index === activeMenu}
+                  aria-label={`Show ${slide.name} menu`}
+                  onClick={() => setActiveMenu(index)}
+                >
+                  <span className={index === activeMenu ? "menu-active-dot is-active" : "menu-active-dot"} />
+                  <span className="menu-thumb">
+                    <img src={slide.image} alt="" />
+                  </span>
+                  <span className={index === activeMenu ? "menu-thumb-label is-active" : "menu-thumb-label"}>
+                    {slide.name}
+                  </span>
+                </button>
+              ))}
+            </div>
 
-        <div className="menu-grid">
-          {visibleMenu.map((item, index) => (
-            <article className="menu-card" key={item.name}>
-              <div className="menu-card-image">
-                <img src={menuImageFor(index + 1)} alt="" />
-                <span>{String(index + 1).padStart(2, "0")}</span>
-              </div>
-              <div className="menu-card-body">
-                <div>
-                  <small>{item.category}</small>
-                  <h3>{item.name}</h3>
-                </div>
-                <strong>{item.price ? `₹${item.price}` : "ASK"}</strong>
-              </div>
-              <p>{item.description}</p>
-            </article>
-          ))}
-        </div>
-
-        <div className="menu-cta">
-          <span>More categories · more combinations · same local stop</span>
-          <a href={business.orderUrl} target="_blank" rel="noreferrer">View full online menu <ArrowUpRight size={17} /></a>
+            <div className="menu-meta">
+              <span className="menu-meta-name" key={menuSlides[activeMenu].role}>
+                {menuSlides[activeMenu].role}
+              </span>
+              <span className="menu-meta-role" key={menuSlides[activeMenu].name}>
+                {menuSlides[activeMenu].name} · {menuSlides[activeMenu].meta}
+              </span>
+              <span className="menu-meta-time">10 AM — 10 PM</span>
+              <a className="menu-order-link" href={business.orderUrl} target="_blank" rel="noreferrer">
+                Order online · {menuSlides[activeMenu].price} <ArrowUpRight size={15} />
+              </a>
+            </div>
+          </div>
         </div>
       </section>
 
