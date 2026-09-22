@@ -1,8 +1,7 @@
 import { useMemo, useState } from "react";
 import { ArrowUpRight, Clock3, MapPin, Menu as MenuIcon, Star, Utensils, X } from "lucide-react";
-import { business, filterMenu, menuCategories, menuItems } from "./data";
+import { business, businessImages, filterMenu, menuCategories, menuItems } from "./data";
 
-const heroImage = "https://images.openai.com/static-rsc-1/jcbQRMEWFCdJpXa7TMl5XG2R7ohpOItrOadipvY0Rk4rm3KXSMuy9b-OVYV3nffPGjqUqUTScKXqDuSxLsO7KSlF_0qPr6ov4Ggpy9-SXolEiNPQwbqjIffPsupZp--cODUJvTgEd6MqHFTulN2Ts8RFhfLdMidNAiOy_yPMVlo";
 
 export default function App() {
   const [active, setActive] = useState<typeof menuCategories[number]>("All");
@@ -43,7 +42,7 @@ export default function App() {
         </div>
         <div className="hero-visual">
           <div className="image-card">
-            <img src={heroImage} alt="Food Plaza listing photo" />
+            <img src={businessImages[0].src} alt={businessImages[0].alt} />
             <div className="image-tag">BETTIAH<br/><b>FOOD / FAST / FRESH</b></div>
           </div>
           <div className="stamp">FOOD<br/><span>PLAZA</span><small>since 2018*</small></div>
@@ -90,8 +89,15 @@ export default function App() {
         </div>
       </section>
 
+      
+      <section className="visual-strip shell" aria-label="Food Plaza business photos">
+        <div className="visual-main"><img src={businessImages[1].src} alt={businessImages[1].alt} loading="lazy" /></div>
+        <div className="visual-side"><img src={businessImages[2].src} alt={businessImages[2].alt} loading="lazy" /></div>
+        <div className="visual-note"><span>REAL LOCAL ASSETS</span><strong>Photos surfaced from the Food Plaza Bettiah business listing.</strong><small>Exact dish availability can change; the live ordering menu remains the source for current items.</small></div>
+      </section>
+
       <section className="feature shell">
-        <div className="feature-image"><img src={heroImage} alt="Food Plaza in Bettiah" /></div>
+        <div className="feature-image"><img src={businessImages[1].src} alt={businessImages[1].alt} loading="lazy" /></div>
         <div className="feature-copy"><div className="section-kicker">03 / LOCAL ENERGY</div><h2>One stop.<br/><em>Many cravings.</em></h2><p>Quick snack? Group order? Something spicy after a long day? The menu spans breakfast, starters, rice and biryani, noodles, pasta, burgers, rolls, drinks and pizza.</p><a href="#visit" className="text-link">Plan your visit <ArrowUpRight size={17}/></a></div>
       </section>
 
