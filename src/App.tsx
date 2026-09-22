@@ -12,7 +12,7 @@ import {
   ShoppingBag,
   Star
 } from "lucide-react";
-import { business, businessImages } from "./data";
+import { business, businessImages, filterMenu, menuCategories, menuItems } from "./data";
 
 const gallery = businessImages;
 
@@ -108,7 +108,7 @@ export default function App() {
   const [activeMenu, setActiveMenu] = useState(0);
   const [galleryIndex, setGalleryIndex] = useState(0);
   const [reviewIndex, setReviewIndex] = useState(0);
-  const [sent, setSent] = useState(false);
+  const [sent, setSent] = useState(false);\n  const [menuCategory, setMenuCategory] = useState<(typeof menuCategories)[number]>("All");
 
   useEffect(() => {
     const sections = document.querySelectorAll(".reveal");
@@ -276,6 +276,57 @@ export default function App() {
               </a>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section id="full-menu" className="section full-menu-section reveal">
+        <div className="section-head compact">
+          <div>
+            <span className="section-kicker">03 / THE COMPLETE MENU</span>
+            <h2>Every craving.<br /><em>One plaza.</em></h2>
+          </div>
+          <div className="full-menu-note">
+            <strong>{filterMenu(menuItems, menuCategory).length} items</strong>
+            <span>Live listing data · Swiggy + Zomato</span>
+          </div>
+        </div>
+
+        <div className="menu-source-strip" role="tablist" aria-label="Menu categories">
+          {menuCategories.map(category => (
+            <button
+              key={category}
+              type="button"
+              className={menuCategory === category ? "source-chip active" : "source-chip"}
+              role="tab"
+              aria-selected={menuCategory === category}
+              onClick={() => setMenuCategory(category)}
+            >
+              {category}
+            </button>
+          ))}
+        </div>
+
+        <div className="complete-menu-grid">
+          {filterMenu(menuItems, menuCategory).map((item, index) => (
+            <article className="complete-menu-card" key={`${item.name}-${item.category}-${index}`}>
+              <div className="complete-menu-image">
+                <img src={item.image || businessImages[3].src} alt={`${item.name} at Food Plaza Bettiah`} loading="lazy" />
+                <span>{item.source}</span>
+              </div>
+              <div className="complete-menu-info">
+                <div>
+                  <span className="complete-menu-category">{item.category}</span>
+                  <h3>{item.name}</h3>
+                </div>
+                <strong>{item.price ? `₹${item.price}` : "Price on listing"}</strong>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <div className="menu-source-note">
+          <span>PRICES SHOWN WHERE SWIGGY CURRENTLY EXPOSES THEM.</span>
+          <span>ZOMATO ITEMS WITHOUT A PUBLICLY EXPOSED PRICE ARE MARKED “PRICE ON LISTING”.</span>
         </div>
       </section>
 
