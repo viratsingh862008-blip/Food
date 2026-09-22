@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { ArrowRight, ArrowUpRight, Clock3, MapPin, Navigation, Phone, ShoppingBag, Star } from "lucide-react";
+import { ArrowRight, ArrowUpRight, ShoppingBag } from "lucide-react";
 import { businessImages } from "./data";
 import MenuPage from "./MenuPage";
 import AdminPanel from "./AdminPanel";
@@ -18,7 +18,6 @@ function useReveal() {
 
 function PublicSite() {
   const site = useSiteConfig();
-  const [sent, setSent] = useState(false);
   const [progress, setProgress] = useState(0);
   const [viewportWidth, setViewportWidth] = useState(() => window.innerWidth);
   useReveal();
@@ -90,8 +89,6 @@ function PublicSite() {
         <div className="hero-footer"><span>{site.business.rating} SWIGGY RATINGS</span><span>{site.business.hours}</span><span>{site.business.address}</span><ArrowUpRight size={18}/></div>
       </div>
     </section>
-
-    <div className="ticker" aria-hidden="true"><div className="ticker-track"><span>{site.ticker}</span><span>{site.ticker}</span></div></div>
 
     <div className="ticker" aria-hidden="true"><div className="ticker-track"><span>{site.ticker}</span><span>{site.ticker}</span></div></div>
 
