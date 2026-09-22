@@ -103,7 +103,7 @@ export default function LuxuryExperience({ site }: { site: SiteConfig }) {
         <p>We borrowed the restraint, pacing and editorial confidence of fine-dining digital experiences — then kept the personality unmistakably Bettiah.</p>
         <button className="luxury-outline-button" onClick={() => setMenuOpen(true)}>Open the full menu <ArrowRight size={15}/></button>
       </div>
-      <div className="luxury-intro-orbit"><div className="orbit-ring"/><span>SUPRIYA ROAD · BETTIAH</span></div>
+      <div className="luxury-intro-orbit"><div className="orbit-ring"/><div className="luxury-video-card"><video autoPlay muted loop playsInline preload="metadata" poster="https://strvid.nyc3.cdn.digitaloceanspaces.com/motionsite/restaurant_bg.png"><source src="https://strvid.nyc3.cdn.digitaloceanspaces.com/motionsite/hero_food_video.mp4" type="video/mp4"/></video><div className="luxury-video-tag"><span>FOOD PLAZA / SPECIAL</span><strong>Made for the table.</strong></div></div><span>SUPRIYA ROAD · BETTIAH</span></div>
     </section>
 
     <section id="luxury-menu" className="luxury-section luxury-dishes" data-luxury-reveal>
