@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { ArrowRight, ArrowUpRight, ShoppingBag } from "lucide-react";
+import { ArrowRight, ArrowUpRight, MessageCircle, ShoppingBag } from "lucide-react";
 import { businessImages } from "./data";
 import MenuPage from "./MenuPage";
 import AdminPanel from "./AdminPanel";
@@ -46,7 +46,7 @@ function PublicSite() {
     <nav className="site-nav" aria-label="Primary navigation">
       <a className="nav-brand" href="/">{site.brand.name}<span>{site.brand.suffix}</span></a>
       <div className="nav-links"><a href="/menu">Menu</a><a href="#featured">Featured</a><a href="#location">Location</a><a href="#about">About</a><a href="#contact">Contact</a></div>
-      <a className="nav-order" href={site.business.orderUrl} target="_blank" rel="noreferrer">{site.nav.orderLabel}<ShoppingBag size={15}/></a>
+      <a className="nav-order" href={site.business.whatsappUrl} target="_blank" rel="noreferrer">{site.nav.orderLabel}<MessageCircle size={15}/></a>
     </nav>
 
     <section id="hero" className="food-hero">
