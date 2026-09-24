@@ -148,8 +148,8 @@ export default function LuxuryExperience({ site }: { site: SiteConfig }) {
     <section id="reservations" className="luxury-section luxury-reservations" data-luxury-reveal>
       <div className="reservation-glow"/>
       <div className="reservation-copy"><span className="luxury-kicker">06 / RESERVATIONS</span><h2>Make a<br/><em>table happen.</em></h2><p>Planning a family meal, small celebration or simply want a table ready when you arrive?</p></div>
-      <form className="reservation-form" onSubmit={e => { e.preventDefault(); setSent(true); }}>
-        <label>Date<input required type="date"/></label><label>Time<select defaultValue="19:30"><option>18:30</option><option>19:30</option><option>20:30</option><option>21:30</option></select></label>
+      <form className="reservation-form" onSubmit={e => { e.preventDefault(); const form = e.currentTarget; const data = new FormData(form); const date = String(data.get("date") || ""); const time = String(data.get("time") || ""); const guests = String(data.get("guests") || ""); const requests = String(data.get("requests") || "").trim(); const text = `Hi Food Plaza, I would like to make an enquiry.\nDate: ${date}\nTime: ${time}\nGuests: ${guests}${requests ? `\nSpecial requests: ${requests}` : ""}`; window.open(`${site.business.whatsappUrl.split("?")[0]}?text=${encodeURIComponent(text)}`, "_blank", "noopener,noreferrer"); setSent(true); }}>
+        <label>Date<input name="date" required type="date"/></label><label>Time<select name="time" defaultValue="19:30"><option>18:30</option><option>19:30</option><option>20:30</option><option>21:30</option></select></label>
         <label>Guests<select defaultValue="2"><option>2 guests</option><option>3 guests</option><option>4 guests</option><option>5 guests</option><option>6+ guests</option></select></label>
         <label className="reservation-wide">Special requests<textarea rows={3} placeholder="Birthday, family table, dietary note…"/></label>
         <button type="submit" className="reservation-submit">{sent ? "REQUEST READY ✓" : "REQUEST A TABLE"}<ArrowRight size={16}/></button>
@@ -163,7 +163,7 @@ export default function LuxuryExperience({ site }: { site: SiteConfig }) {
 
     <footer className="luxury-footer">
       <div><span className="luxury-kicker">FOOD PLAZA™</span><h2>Good food.<br/><em>Better mood.</em></h2><p>{site.business.address}</p></div>
-      <div className="luxury-footer-links"><a href="/menu">Menu <ArrowUpRight size={14}/></a><a href={site.business.mapsUrl} target="_blank" rel="noreferrer">Location <ArrowUpRight size={14}/></a><a href={site.business.orderUrl} target="_blank" rel="noreferrer">Order online <ShoppingBag size={14}/></a></div>
+      <div className="luxury-footer-links"><a href="/menu">Menu <ArrowUpRight size={14}/></a><a href={site.business.mapsUrl} target="_blank" rel="noreferrer">Location <ArrowUpRight size={14}/></a><a href={site.business.orderUrl} target="_blank" rel="noreferrer">Order online <ShoppingBag size={14}/></a><a href={site.business.whatsappUrl} target="_blank" rel="noreferrer">WhatsApp enquiry <ArrowUpRight size={14}/></a></div>
       <div className="luxury-footer-bottom"><span>SUPRIYA ROAD · BETTIAH · BIHAR 845438</span><a href="#hero">BACK TO TOP ↑</a></div>
     </footer>
 
