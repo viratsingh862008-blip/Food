@@ -1160,3 +1160,50 @@ img { max-width: 100%; }
   .reservation-form{grid-template-columns:1fr}
   .luxury-footer{padding:18vw 6vw 24px}
 }
+
+/* Hero word visibility fix + direct enquiry styling */
+.title-stack{
+  z-index:14;
+  isolation:isolate;
+  padding-top:0;
+}
+.hero-word{
+  height:auto;
+  min-height:0;
+  overflow:visible;
+}
+.hero-food-word{
+  top:6vh;
+  z-index:2;
+}
+.hero-plaza-word{
+  top:30vh;
+  z-index:3;
+}
+.hero-word-front{
+  color:#fff8ea;
+  text-shadow:0 8px 0 rgba(117,19,15,.92),0 2px 18px rgba(117,19,15,.18);
+  -webkit-text-stroke:1px rgba(117,19,15,.2);
+}
+.hero-word-shadow{
+  opacity:.95;
+}
+.hero-food-blue,.hero-plaza-blue{
+  transform:translate(-50%,14px);
+}
+.hero-food-gold,.hero-plaza-gold{
+  transform:translate(-50%,7px);
+}
+.food-hero-visual{
+  z-index:10;
+}
+.hero-copy{
+  z-index:22;
+}
+@media(max-width:700px){
+  .hero-food-word{top:8vh;}
+  .hero-plaza-word{top:31vh;}
+  .hero-word-front,.hero-word-shadow{
+    -webkit-text-stroke:.6px rgba(117,19,15,.22);
+  }
+}
