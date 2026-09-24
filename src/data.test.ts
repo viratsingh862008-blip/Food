@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { business, businessImages, filterMenu, menuCategories, menuItems } from "./data";
+import { defaultSiteConfig } from "./siteConfig";
 
 describe("Food Plaza menu", () => {
   it("contains the expanded menu categories", () => {
@@ -25,6 +26,11 @@ describe("Food Plaza menu", () => {
     expect(business.mapEmbedUrl).toContain("output=embed");
   });
 
+
+  it("exposes a direct WhatsApp enquiry destination", () => {
+    expect(defaultSiteConfig.business.whatsappUrl).toMatch(/^https:\/\/wa\.me\/918789659093\?text=/);
+    expect(defaultSiteConfig.business.whatsappUrl).toContain("Food%20Plaza");
+  });
   it("contains the expanded menu dataset", () => {
     expect(menuItems.length).toBeGreaterThanOrEqual(70);
     expect(new Set(menuItems.map(item => item.category)).size).toBeGreaterThanOrEqual(12);
